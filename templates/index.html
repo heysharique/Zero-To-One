@@ -99,7 +99,7 @@
                         <div>
                             <img src="{{ url_for('static',filename='img/black.jpg') }}" class="options-img" />
                         </div>
-                        <div id="xyz" class="options-title p-2"><span class="fas fa-star"></span><span
+                        <div id="beginner" class="options-title p-2"><span class="fas fa-star"></span><span
                                 class="far fa-star"></span><span class="far fa-star"></span><br>
                             Beginner
                         </div>
@@ -112,7 +112,7 @@
                         <div>
                             <img src="{{ url_for('static',filename='img/black.jpg') }}" class="options-img" />
                         </div>
-                        <div class="options-title p-2">
+                        <div id="interm" class="options-title p-2">
                             {#                            {% if not 'logged_in' in session %}#}
                             {#                            <i class="fa fa-lock"></i>#}
                             {#                            <br>#}
@@ -130,7 +130,7 @@
                         <div>
                             <img src="{{ url_for('static',filename='img/black.jpg') }}" class="options-img" />
                         </div>
-                        <div class="options-title p-2"><span class="fas fa-star"></span><span
+                        <div id="advanced" class="options-title p-2"><span class="fas fa-star"></span><span
                                 class="fas fa-star"></span><span class="fas fa-star"></span><br>
                             Advanced
                         </div>
@@ -166,9 +166,9 @@
             .chat-popup {
                 display: none;
                 position: fixed;
-                bottom: 10px;
+                bottom: 0px;
                 right: 800px;
-                left: 350px;
+                left: 300px;
                 border: 3px solid #f1f1f1;
                 z-index: 9;
             }
@@ -271,44 +271,33 @@
                         {
                             title: 'Home',
                             element: document.querySelector('#home'),
-                            // element: document.querySelector('#xyz'),
-                            intro: 'Click here to view the Home.'
+                                intro: 'Click here to view the Home.'
                         },
                         {
-                            title: 'This is the Login button',
+                            title: 'Login',
                             element: document.querySelector('#login'),
-                            intro: 'You can view all the available pages by clicking on this.'
+                            intro: 'You can login on the website.'
                         },
                         {
-                            title: 'This is the Register',
+                            title: 'Registration',
                             element: document.querySelector('#register'),
                             intro: 'To register click here.'
                         },
                         {
-                            title: 'This is table',
-                            element: document.querySelector('#table'),
-                            intro: 'For viewing the table you can click here.'
+                            title: 'Beginner Section',
+                            element: document.querySelector('#beginner'),
+                            intro: 'Access the beginner section without registration.'
                         },
                         {
-                            title: 'This is a Search Bar',
-                            element: document.querySelector('#search-bar'),
-                            intro: 'You can search the data from here.'
+                            title: 'Intermediate Section',
+                            element: document.querySelector('#interm'),
+                            intro: 'Learn famous cybersecurity concepts.'
                         },
                         {
-                            title: 'Alert',
-                            element: document.querySelector('#alertsDropdown'),
-                            intro: 'Any alert (if any) will be pop here.'
+                            title: 'Advanced Section',
+                            element: document.querySelector('#advanced'),
+                            intro: 'Advanced concepts from cybersecurity domain.'
                         },
-                        {
-                            title: 'Messages',
-                            element: document.querySelector('#messagesDropdown'),
-                            intro: 'All the latest notification/messages will be updated here.'
-                        },
-                        {
-                            title: 'User Profile',
-                            element: document.querySelector('#av'),
-                            intro: 'Click here for viewing user profile.'
-                        }
 
                     ]
                 }, true).start();

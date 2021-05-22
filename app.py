@@ -12,7 +12,6 @@ client = MongoClient(
 db = client.get_database('l2c_db')
 data = db.reg_users
 
-
 # Default URL
 @app.route('/')
 def home():
@@ -48,12 +47,10 @@ def login():
                 return redirect(url_for('home'))
     return render_template('login.html')
 
-
 # Basic Content Page
 @app.route('/basics', methods=['GET', 'POST'])
 def basics():
     return render_template('basics.html')
-
 
 # Intermediate Content Page
 @app.route('/intermediate', methods=['GET', 'POST'])
