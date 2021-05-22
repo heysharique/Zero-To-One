@@ -1,0 +1,29 @@
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger intent="WELCOME" chat-title="konnect" agent-id="98cdbcd5-7649-4b58-bb3a-7bd77ec22971" language-code="en">
+</df-messenger>
+<style>
+    df-messenger {
+        --df-messenger-bot-message: #878fac;
+        --df-messenger-button-titlebar-color: #df9b56;
+        --df-messenger-chat-background-color: #fafafa;
+        --df-messenger-font-color: white;
+        --df-messenger-send-icon: #878fac;
+        --df-messenger-user-message: #479b3d;
+    }
+</style>
+
+<script>
+
+    $(document).ready(function () {
+        window.addEventListener('dfMessengerLoaded', function (event) {
+            $r1 = document.querySelector("df-messenger");
+            $r2 = $r1.shadowRoot.querySelector("df-messenger-chat");
+            $r3 = $r2.shadowRoot.querySelector("df-messenger-user-input"); //for other mods
+
+            var sheet = new CSSStyleSheet;
+            sheet.replaceSync(`div.chat-wrapper[opened="true"] { height: 400px }`);
+            $r2.shadowRoot.adoptedStyleSheets = [sheet];
+
+        });
+    });
+</script>
