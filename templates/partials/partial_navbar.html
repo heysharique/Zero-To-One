@@ -28,14 +28,14 @@
 
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto align-items-lg-center align-items-md-start">
-                    <li class="nav-item"><a href="/" id="home"
+                    <li id="home" class="nav-item"><a href="/"
                                             class="nav-link">Home</a>
                     </li>
                     {% if not 'logged_in' in session %}
-                    <li class="nav-item"><a href="/login"
+                    <li id="login" class="nav-item"><a href="/login"
                                             class="nav-link">Login</a>
                     </li>
-                    <li class="nav-item"><a href="/register"
+                    <li id="register" class="nav-item"><a href="/register"
                                             class="nav-link">Register</a>
                     </li>
                     {% endif %}

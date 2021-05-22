@@ -21,28 +21,10 @@
             <a href="#">
                 <span class="icon"><i class="fa fa-bug" aria-hidden="true"></i>
                 </span>
-                <span class="title">Bug Reporting</span>
+                <span class="title" onclick="openForm()">Bug Reporting</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-                <span class="title">Application co-creation</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-                <span class="title">Announcement</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-                <span class="title">Sign Out</span>
-            </a>
-        </li>
-    </ul>
+        </ul>
 </div>
 
 
@@ -117,7 +99,7 @@
                         <div>
                             <img src="{{ url_for('static',filename='img/black.jpg') }}" class="options-img" />
                         </div>
-                        <div class="options-title p-2"><span class="fas fa-star"></span><span
+                        <div id="xyz" class="options-title p-2"><span class="fas fa-star"></span><span
                                 class="far fa-star"></span><span class="far fa-star"></span><br>
                             Beginner
                         </div>
@@ -163,6 +145,124 @@
             </div>
         </div>
 
+
+        <div class="dfchatbot">
+            <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+            <df-messenger intent="WELCOME" chat-title="konnect" agent-id="98cdbcd5-7649-4b58-bb3a-7bd77ec22971"
+                language-code="en"></df-messenger>
+            <style>
+                df-messenger {
+                    --df-messenger-bot-message: #878fac;
+                    --df-messenger-button-titlebar-color: #df9b56;
+                    --df-messenger-chat-background-color: #fafafa;
+                    --df-messenger-font-color: white;
+                    --df-messenger-send-icon: #878fac;
+                    --df-messenger-user-message: #479b3d;
+                }
+            </style>
+        </div>
+
+        <style>
+            .chat-popup {
+                display: none;
+                position: fixed;
+                bottom: 10px;
+                right: 650px;
+                left: 300px;
+                border: 3px solid #f1f1f1;
+                z-index: 9;
+            }
+
+            /* Add styles to the form container */
+            .form-container {
+                max-width: 300px;
+                padding: 10px;
+                background-color: rgb(52, 58, 64);
+            }
+
+            .textCol {
+                color: white;
+            }
+
+            .form-container input {
+                width: 100%;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                border: none;
+                background: #f1f1f1;
+                resize: none;
+            }
+
+            /* Full-width textarea */
+            .form-container textarea {
+                width: 100%;
+                padding: 15px;
+                margin: 5px 0 22px 0;
+                border: none;
+                background: #f1f1f1;
+                resize: none;
+                min-height: 200px;
+            }
+
+            /* When the textarea gets focus, do something */
+            .form-container textarea:focus {
+                background-color: #ddd;
+                outline: none;
+            }
+
+            /* Set a style for the submit/send button */
+            .form-container {
+                padding: 16px 20px;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                margin-bottom: 10px;
+                opacity: 1;
+            }
+
+            /* Add some hover effects to buttons */
+            .form-container .btn:hover,
+            .open-button:hover {
+                opacity: 1;
+            }
+        </style>
+
+        <div class="chat-popup" id="myForm">
+            <form action="/sendemail" method="POST" class="form-container">
+                <h2 class="textCol">Report a bug!</h2>
+                <label for="email" class="textCol"><b>E-mail</b></label><br>
+                <input type="text" id="email" name="email" required="required" placeholder="E-mail" />
+                <label for="msg" class="textCol"><b>Message</b></label>
+                <textarea placeholder="Bug description.." name="msg" required></textarea>
+                <button type="submit" class="btn btn-outline-success btn-lg">Send</button>
+                <button type="button" class="btn btn-outline-danger  btn-lg" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                window.addEventListener('dfMessengerLoaded', function (event) {
+                    $r1 = document.querySelector("df-messenger");
+                    $r2 = $r1.shadowRoot.querySelector("df-messenger-chat");
+                    $r3 = $r2.shadowRoot.querySelector("df-messenger-user-input"); //for other mods
+
+                    var sheet = new CSSStyleSheet;
+                    sheet.replaceSync(`div.chat-wrapper[opened="true"] { height: 400px }`);
+                    $r2.shadowRoot.adoptedStyleSheets = [sheet];
+
+                });
+            });
+        </script>
+
         <script>
             function call() {
                 introJs().setOptions({
@@ -171,17 +271,18 @@
                         {
                             title: 'Home',
                             element: document.querySelector('#home'),
-                            intro: 'Click here to view the Dashbaord.'
+                            // element: document.querySelector('#xyz'),
+                            intro: 'Click here to view the Home.'
                         },
                         {
-                            title: 'This is the Page button',
-                            element: document.querySelector('#page'),
+                            title: 'This is the Login button',
+                            element: document.querySelector('#login'),
                             intro: 'You can view all the available pages by clicking on this.'
                         },
                         {
-                            title: 'This is the Chart',
-                            element: document.querySelector('#chart'),
-                            intro: 'To view the chart click here.'
+                            title: 'This is the Register',
+                            element: document.querySelector('#register'),
+                            intro: 'To register click here.'
                         },
                         {
                             title: 'This is table',
@@ -213,7 +314,24 @@
                 }, true).start();
             }
 
+            //hide-show df icon
+            var dfchatbot = document.querySelector('.dfchatbot');
+            var dffloatbutton = document.querySelector('.dffloatbutton');
+            dfchatbot.hidden = true;
+
+            dffloatbutton.addEventListener('click', () => {
+                dfchatbot.hidden = false;
+            });
         </script>
+
+
+        <!-- introjs css -->
+        <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
+        <!-- Add Nazanin template -->
+        <link rel="stylesheet" href="https://unpkg.com/intro.js/themes/introjs-nazanin.css">
+
+        <!-- Introjs script -->
+        <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
 
 
         {% endblock %}

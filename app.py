@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, session, redirect, url_for
 from pymongo import MongoClient
 import uuid, os, bcrypt
+import smtplib
 
 app = Flask(__name__)
 
@@ -61,7 +62,6 @@ def intermediate():
         return redirect(url_for('login'))
     return render_template('intermediate.html')
 
-
 # Advanced Content Page
 @app.route('/advanced', methods=['GET', 'POST'])
 def advanced():
@@ -69,6 +69,27 @@ def advanced():
         return redirect(url_for('login'))
     return render_template('advanced.html')
 
+# Email Features for Bugs
+@app.route('/sendemail', methods=['GET', 'POST'])
+def sendemail():
+    server = smtplib.SMTP('smtp.gmail.com',587)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+    
+    server.login('test.email.0to1@gmail.com','Test.email.zerotoone')  
+
+    subject = "Bug Report"
+    body= "This is a bug report sent by " + request.form['email'] + ".\n\nReport: " + request.form['msg']
+    msg=f"Subject: {subject}\n\n{body} "
+
+    server.sendmail(
+        'test.email.0to1@gmail.com',
+        'sharique29311@gmail.com',
+        msg
+        )
+    server.quit()
+    return redirect(url_for('home'))
 
 # Logout Request
 @app.route('/logout')
@@ -77,7 +98,6 @@ def logout():
     session.pop('email', None)
     session.pop('logged_in', None)
     return redirect(url_for('home'))
-
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8001, debug=True)
